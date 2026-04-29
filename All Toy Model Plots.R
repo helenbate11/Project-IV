@@ -48,10 +48,11 @@ simple_em_out <- simple_BL_emulator_1d(xP=xP, xD=xD, D=D, theta=theta, sigma=sig
 
 saving_1d_BL_plot(em_out=simple_em_out, xP=xP, xD=xD, D=D, ylim=c(-2.5,2.5), 
                   EmulatorType="Simple", filepath="/Users/helenbate/Documents/Year 4/Diss/Code/Images/1d Simple/",
-                  function_name="F5", wd=800, ht=620)
-saving_1d_BL_plot(em_out=simple_em_out, xP=xP, xD=xD, D=D, ylim=c(-2.5,2.5), 
-                  EmulatorType="Simple", filepath="/Users/helenbate/Documents/Year 4/Diss/Code/Images/1d Deriv/",
-                  function_name="F5", wd=800, ht=620)
+                  function_name="F", wd=800, ht=620)
+
+# saving_1d_BL_plot(em_out=simple_em_out, xP=xP, xD=xD, D=D, ylim=c(-2.5,2.5), 
+#                   EmulatorType="Simple", filepath="/Users/helenbate/Documents/Year 4/Diss/Code/Images/1d Deriv/",
+#                   function_name="F5", wd=800, ht=620)
 
 # following plot not used
 E_dfdx <- 0
@@ -114,18 +115,18 @@ gradf <- function(x) {
 }
 
 # following three plots not used
-fxP_mat <- matrix(f(xP), nrow=length(x_grid), ncol=length(x_grid))
-gradfxP_mat_list <- list("x1"=matrix(gradf(xP)[,1], nrow=length(x_grid), ncol=length(x_grid)),
-                         "x2"=matrix(gradf(xP)[,2], nrow=length(x_grid), ncol=length(x_grid)))
-emul_fill_cont(cont_mat=fxP_mat, xD=xD, x_grid=x_grid, 
-               color.palette=exp_cols, 
-               main="True Function f(x)")
-emul_fill_cont(cont_mat=gradfxP_mat_list[[1]], xD=xD, x_grid=x_grid, 
-               color.palette=exp_cols, 
-               main="True df/dx_1")
-emul_fill_cont(cont_mat=gradfxP_mat_list[[2]], xD=xD, x_grid=x_grid, 
-               color.palette=exp_cols, 
-               main="True df/dx_2")
+# fxP_mat <- matrix(f(xP), nrow=length(x_grid), ncol=length(x_grid))
+# gradfxP_mat_list <- list("x1"=matrix(gradf(xP)[,1], nrow=length(x_grid), ncol=length(x_grid)),
+#                          "x2"=matrix(gradf(xP)[,2], nrow=length(x_grid), ncol=length(x_grid)))
+# emul_fill_cont(cont_mat=fxP_mat, xD=xD, x_grid=x_grid, 
+#                color.palette=exp_cols, 
+#                main="True Function f(x)")
+# emul_fill_cont(cont_mat=gradfxP_mat_list[[1]], xD=xD, x_grid=x_grid, 
+#                color.palette=exp_cols, 
+#                main="True df/dx_1")
+# emul_fill_cont(cont_mat=gradfxP_mat_list[[2]], xD=xD, x_grid=x_grid, 
+#                color.palette=exp_cols, 
+#                main="True df/dx_2")
 
 ########################################################
 # 2d Emulation - set up
@@ -191,14 +192,14 @@ em_out_simple <- simple_BL_emulator_2d_fast(xP=xP, xD=xD, D=D,
 #                cont_levs=seq(cont_levs_mat[2,1], cont_levs_mat[2,2], cont_levs_mat[2,3]), 
 #                x_grid=x_grid, color.palette=var_cols, plot_xD=TRUE, xD=xD)
 
-ED_fx_mat <- matrix(em_out_simple[,"ExpD_f.x."], nrow=length(x_grid), ncol=length(x_grid)) 
-ED_fx_plot <- emul_fill_cont(cont_mat=ED_fx_mat, 
-                             cont_levs=seq(cont_levs_mat[1,1],cont_levs_mat[1,2], cont_levs_mat[1,3]), 
-                             xD=xD, x_grid=x_grid, color.palette=exp_cols, 
-                             main=bquote("Emulator Adjusted Expectation " ~ E[D] * "[f(x)]" ~ "\n (" *
-                                           theta == .(theta[1]) * "," ~ .(theta[2]) * "), " ~
-                                           sigma == .(sigma)
-                             ))
+# ED_fx_mat <- matrix(em_out_simple[,"ExpD_f.x."], nrow=length(x_grid), ncol=length(x_grid)) 
+# ED_fx_plot <- emul_fill_cont(cont_mat=ED_fx_mat, 
+#                              cont_levs=seq(cont_levs_mat[1,1],cont_levs_mat[1,2], cont_levs_mat[1,3]), 
+#                              xD=xD, x_grid=x_grid, color.palette=exp_cols, 
+#                              main=bquote("Emulator Adjusted Expectation " ~ E[D] * "[f(x)]" ~ "\n (" *
+#                                            theta == .(theta[1]) * "," ~ .(theta[2]) * "), " ~
+#                                            sigma == .(sigma)
+#                              ))
 
 saving_fxD_plots(em_out=em_out_simple, xD=xD, x_grid=x_grid, 
                  cont_levs_mat=cont_levs_mat, wd=690,
@@ -258,7 +259,7 @@ em_out_BwD <- single_BwD_BL_emulator(xP=xP,
 saving_boundary_with_runs_plots(em_out=em_out_BwD, x_grid=x_grid, wd=690,
                                 cont_levs_mat=cont_levs_mat, boundary=boundary,
                                 filepath="Documents/Year 4/Diss/Code/Images/BwD/",
-                                function_name="F", EmulatorType="Boundary and Derivative on the Boundary")
+                                function_name="F", EmulatorType="Boundary with Derivative on the Boundary")
 
 # BwD and Runs Emulator (single boundary)
 E_f <- 0
@@ -308,8 +309,8 @@ n <- 12
 boundary <- list("x1"=NULL, "x2"=0.1)
 
 # BwR Emulator Variance examples for LHD on [0,2]x[0.5, 2]
-# seeds = 14, 121, 124, 143
-seed <- 14
+# seeds = 5, 14, 121, 124, 143
+seed <- 5
 set.seed(seed)
 xD <- best_lhd(n, M=M, x1_lim=c(0,2), x2_lim=c(0.5,2), print_switch=FALSE)
 em_out_boundary <- single_boundary_with_runs_BL_emulator(xP=xP, xD=xD, D=f(xD),
@@ -319,7 +320,7 @@ saving_boundary_with_runs_plots(em_out=em_out_boundary, xD=xD, x_grid=x_grid,
                                 boundary=list("x1"=NULL, "x2"=0.1),
                                 wd=690, ht=620,
                                 cont_levs_mat=cont_levs_mat,
-                                filepath=paste0("Documents/Year 4/Diss/Code/Images/Var Comp Simple BwR/Variance Examples/DISS/seed=", seed, "/"),
+                                filepath=paste0("Documents/Year 4/Diss/Code/Images/Var Comp Simple BwR/Variance Examples/"),
                                 function_name=paste0("F_seed_", seed),
                                 EmulatorType="Boundary with Runs") 
 
@@ -355,9 +356,9 @@ x2_lim_2 <- c(0.6,2)
 
 # BwDR Emulator Variance examples for LHD on [0,2]x[0.6, 2]
 # seeds = 123, 124, 143, 444
-seed <- 444
+seed <- 123
 set.seed(seed)
-xD <- best_lhd(n, M=M, x1_lim=c(0,2), x2_lim=x2_lim, print_switch=FALSE)
+xD <- best_lhd(n, M=M, x1_lim=c(0,2), x2_lim=x2_lim_2, print_switch=FALSE)
 em_out_BwDR <- single_BwD_with_runs_BL_emulator(xP=xP, xD=xD, D=f(xD),
                                                 boundary=boundary,
                                                 theta=theta, sigma=sigma, E_f=E_f)
@@ -365,9 +366,9 @@ saving_boundary_with_runs_plots(em_out=em_out_BwDR, xD=xD, x_grid=x_grid,
                                 boundary=list("x1"=NULL, "x2"=0.1),
                                 wd=690, ht=620,
                                 cont_levs_mat=cont_levs_mat,
-                                filepath=paste0("Documents/Year 4/Diss/Code/Images/Var Comp BwR BwDR/Variance Examples/seed=", seed, "/"),
+                                filepath=paste0("Documents/Year 4/Diss/Code/Images/Var Comp BwR BwDR/Variance Examples/"),
                                 function_name=paste0("F_seed_", seed),
-                                EmulatorType="Boundary and Derivative on the Boundary with Runs") 
+                                EmulatorType="Boundary with Derivative on the Boundary and Runs") 
 
 # Boxplots and mean with error bars average variance plots
 number_to_av <- 500
