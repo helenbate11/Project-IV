@@ -272,7 +272,7 @@ em_out_BwDR <- single_BwD_with_runs_BL_emulator(xP=xP, xD=xD, D=D,
 saving_boundary_with_runs_plots(em_out=em_out_BwDR, xD=xD, x_grid=x_grid, wd=690,
                                 cont_levs_mat=cont_levs_mat, boundary=boundary,
                                 filepath="Documents/Year 4/Diss/Code/Images/BwD and Runs/",
-                                function_name="F", EmulatorType="Boundary and Derivative on the Boundary with Runs")
+                                function_name="F", EmulatorType="Boundary with Derivative on the Boundary and Runs")
 
 
 ########################################################
